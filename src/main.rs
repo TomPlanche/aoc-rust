@@ -8,7 +8,7 @@
 mod day_01;
 
 use day_01::response_part_1;
-// use day_01::response_part_2;
+use day_01::response_part_2;
 // Variables  =========================================================================== Variables
 
 // Functions  =========================================================================== Functions
@@ -16,5 +16,5 @@ use day_01::response_part_1;
 // Main  ====================================================================================  Main
 fn main() {
 	response_part_1();
-	// response_part_2();
+	response_part_2();
 }
