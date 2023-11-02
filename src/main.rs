@@ -4,7 +4,7 @@
 ///
 
 // Imports  ==============================================================================  Imports
-#[path = "./bin/year_2015/day_06.rs"]
+#[path = "./bin/year_2015/day_07.rs"]
 mod day;
 
 use day::response_part_1;
