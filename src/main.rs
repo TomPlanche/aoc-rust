@@ -4,11 +4,11 @@
 ///
 
 // Imports  ==============================================================================  Imports
-#[path = "./bin/year_2015/day_01.rs"]
-mod day_01;
+#[path = "./bin/year_2015/day_03.rs"]
+mod day;
 
-use day_01::response_part_1;
-use day_01::response_part_2;
+use day::response_part_1;
+use day::response_part_2;
 // Variables  =========================================================================== Variables
 
 // Functions  =========================================================================== Functions
@@ -16,5 +16,6 @@ use day_01::response_part_2;
 // Main  ====================================================================================  Main
 fn main() {
 	response_part_1();
+	println!();
 	response_part_2();
 }
