@@ -3,39 +3,37 @@
 /// Code for the day 01 of the Advent of Code challenge year 2022
 ///
 // Imports  ==============================================================================  Imports
-use std::{collections::VecDeque, str::FromStr};
+use crate::point::Point;
+
+use std::collections::VecDeque;
 
 // Variables  =========================================================================== Variables
 const INPUT: &str = include_str!("../../../data/year_2022/inputs/day_12.txt");
 
-#[derive(Clone, Copy, PartialEq, Eq)]
-struct Point {
-    x: usize,
-    y: usize,
-}
+type MyPoint = Point<usize>;
 
 struct HeightMap {
     map: Vec<Vec<u8>>,
-    start: Point,
-    end: Point,
+    start: MyPoint,
+    end: MyPoint,
 }
 
 impl HeightMap {
     fn from_str(s: &str) -> Self {
         let mut map = Vec::new();
-        let mut start = Point { x: 0, y: 0 };
-        let mut end = Point { x: 0, y: 0 };
+        let mut start = MyPoint { x: 0, y: 0 };
+        let mut end = MyPoint { x: 0, y: 0 };
 
         for (y, line) in s.lines().enumerate() {
             let mut row = Vec::new();
             for (x, c) in line.chars().enumerate() {
                 match c {
                     'S' => {
-                        start = Point { x, y };
+                        start = MyPoint { x, y };
                         row.push(b'a');
                     }
                     'E' => {
-                        end = Point { x, y };
+                        end = MyPoint { x, y };
                         row.push(b'z');
                     }
                     _ => row.push(c as u8),
@@ -61,7 +59,7 @@ impl HeightMap {
     /// ## Returns
     ///
     /// * `bool` - True if the move is valid, false otherwise.
-    fn is_valid_move(&self, from: Point, to: Point) -> bool {
+    fn is_valid_move(&self, from: MyPoint, to: MyPoint) -> bool {
         to.x < self.map[0].len() // Check if the next point is within the map bounds
             && to.y < self.map.len() // Check if the next point is within the map bounds
             && self.map[to.y][to.x] <= self.map[from.y][from.x] + 1 // Check if the height difference is at most 1
@@ -92,7 +90,7 @@ impl HeightMap {
 
             // Check the four possible directions
             for (dx, dy) in &[(0, 1), (1, 0), (0, -1), (-1, 0)] {
-                let next = Point {
+                let next = MyPoint {
                     x: (current.x as i32 + dx) as usize,
                     y: (current.y as i32 + dy) as usize,
                 }; // Calculate the next point
@@ -125,7 +123,7 @@ impl HeightMap {
         for (y, row) in self.map.iter().enumerate() {
             for (x, &height) in row.iter().enumerate() {
                 if height == b'a' {
-                    queue.push_back((Point { x, y }, 0));
+                    queue.push_back((MyPoint { x, y }, 0));
                     visited[y][x] = true;
                 }
             }
@@ -138,7 +136,7 @@ impl HeightMap {
             }
 
             for (dx, dy) in &[(0, 1), (1, 0), (0, -1), (-1, 0)] {
-                let next = Point {
+                let next = MyPoint {
                     x: (current.x as i32 + dx) as usize,
                     y: (current.y as i32 + dy) as usize,
                 };
